@@ -1,11 +1,3 @@
-import personalAsset from "@/assets/personal.jpg.asset.json";
-import neoluxeTrustAsset from "@/assets/neoluxe-trust.jpg.asset.json";
-import neoluxeAsset from "@/assets/neoluxe.jpg.asset.json";
-import aniketPortfolioAsset from "@/assets/aniket-portfolio.jpg.asset.json";
-import toolnamiStudioAsset from "@/assets/toolnami-studio.jpg.asset.json";
-import toolnamiAsset from "@/assets/toolnami.jpg.asset.json";
-import figmaShowcaseAsset from "@/assets/figma-showcase.jpg.asset.json";
-
 export const ecosystemProjects = [
   {
     number: "01",
@@ -13,7 +5,7 @@ export const ecosystemProjects = [
     url: "https://sites.google.com/view/aniketbhalerao",
     description:
       "An early personal publishing space documenting Aniket's work, ideas, and creative direction.",
-    image: personalAsset.url,
+    image: "/images/aniket-outdoor.png",
     type: "Personal platform",
   },
   {
@@ -22,7 +14,7 @@ export const ecosystemProjects = [
     url: "https://neoluxetrast.lovable.app",
     description:
       "A visual publishing experiment connecting LuminaLM, psychology, storytelling, and anime edits.",
-    image: neoluxeTrustAsset.url,
+    image: "/images/aniket-ncc-pride.png",
     type: "Creative media",
   },
   {
@@ -31,7 +23,7 @@ export const ecosystemProjects = [
     url: "https://neoluxe.lovable.app",
     description:
       "A premium digital portfolio exploring creative development, design systems, and AI engineering.",
-    image: neoluxeAsset.url,
+    image: "/images/aniket-black-casual.png",
     type: "Digital experience",
   },
   {
@@ -40,7 +32,7 @@ export const ecosystemProjects = [
     url: "https://aniketbhalerao.lovable.app",
     description:
       "A cinematic creator portfolio presenting the evolving LuminaLM identity and body of work.",
-    image: aniketPortfolioAsset.url,
+    image: "/images/aniket-white-shirt.png",
     type: "Creator portfolio",
   },
   {
@@ -49,7 +41,7 @@ export const ecosystemProjects = [
     url: "https://toolnami.ai.studio",
     description:
       "A fast online utility platform for everyday productivity, files, images, and creator workflows.",
-    image: toolnamiStudioAsset.url,
+    image: "/images/aniket-company-black-shirt.png",
     type: "Productivity tools",
   },
   {
@@ -58,7 +50,7 @@ export const ecosystemProjects = [
     url: "https://toolnami.lovable.app",
     description:
       "The Lovable edition of ToolNami: practical tools shaped for speed, clarity, and frictionless use.",
-    image: toolnamiAsset.url,
+    image: "/images/aniket-water.png",
     type: "Web application",
   },
   {
@@ -67,7 +59,7 @@ export const ecosystemProjects = [
     url: "https://cone-spore-23450341.figma.site/",
     description:
       "A visual interface experiment built through Figma Make and expressive web composition.",
-    image: figmaShowcaseAsset.url,
+    image: "/images/aniket-black-casual.png",
     type: "Design experiment",
   },
 ] as const;
