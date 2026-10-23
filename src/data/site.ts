@@ -1,8 +1,3 @@
-import nccAsset from "@/assets/ncc-portrait.jpeg.asset.json";
-import waterfallAsset from "@/assets/waterfall.jpeg.asset.json";
-import campusAsset from "@/assets/jersey-campus.png.asset.json";
-import bikeAsset from "@/assets/jersey-bike.png.asset.json";
-
 export const site = {
   name: "Aniket Bhalerao",
   brand: "LuminaLM",
@@ -14,22 +9,22 @@ export const site = {
 
 export const photos = {
   ncc: {
-    src: nccAsset.url,
+    src: "/images/aniket-ncc-pride.png",
     alt: "Aniket Bhalerao in NCC uniform on the parade ground",
     role: "Discipline, leadership, personal journey",
   },
   waterfall: {
-    src: waterfallAsset.url,
+    src: "/images/aniket-water.png",
     alt: "Aniket Bhalerao standing in front of a waterfall",
     role: "Exploration, personality, environment",
   },
   campus: {
-    src: campusAsset.url,
+    src: "/images/aniket-white-shirt.png",
     alt: "Aniket Bhalerao outdoors on campus wearing a blue jersey",
     role: "Everyday creator lifestyle",
   },
   bike: {
-    src: bikeAsset.url,
+    src: "/images/aniket-outdoor.png",
     alt: "Aniket Bhalerao seated on a motorcycle",
     role: "Energy, movement, personality",
   },

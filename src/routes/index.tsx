@@ -18,7 +18,6 @@ import {
   Youtube,
 } from "lucide-react";
 import { useRef, useState, type PointerEvent } from "react";
-import portraitAsset from "@/assets/aniket-bhalerao-portrait.png.asset.json";
 import { ecosystemProjects } from "@/data/ecosystem";
 import { Reveal } from "@/components/motion/Reveal";
 import { Magnetic } from "@/components/motion/Magnetic";
@@ -212,7 +211,7 @@ function PortraitTilt() {
       >
         <div className="relative overflow-hidden">
           <CurtainImage
-            src={portraitAsset.url}
+            src="/images/aniket-company-black-shirt.png"
             alt="Aniket Bhalerao in a professional black outfit"
             ratio="4 / 5"
             loading="eager"
