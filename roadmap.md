@@ -1,0 +1,3 @@
+- [x] Recompose the social links into a compact aesthetic pattern on mobile and desktop.
+- [x] Add restrained continuous animation with reduced-motion support.
+- [x] Verify the social layout and interactions at mobile and desktop sizes.

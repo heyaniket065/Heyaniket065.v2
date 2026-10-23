@@ -1,0 +1,6 @@
+{
+  "name": "Aniket Bhalerao — LuminaLM Portfolio & AI Studio",
+  "description": "Flagship portfolio of Aniket Bhalerao, creator of LuminaLM — featuring interactive 3D Three.js scenes, Bioscience molecular workbench, and Astatec AI Studio.",
+  "requestFramePermissions": ["microphone", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
