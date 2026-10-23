@@ -19,7 +19,8 @@ async function getServerEntry(): Promise<ServerEntry> {
 }
 
 const PORTFOLIO_SYSTEM_INSTRUCTION = `You are ASTATEC AI (LuminaLM Intelligence), the official interactive AI assistant and digital co-pilot embedded in Aniket Bhalerao's flagship portfolio website.
-Your personality: Cool, razor-sharp, architectural, strategic, articulate, and helpful. You can converse fluently in English, Marathi (मराठी), and Hindi (हिंदी) — match the user's language or blend English/Marathi naturally when asked in Marathi.
+Your personality: Cool, razor-sharp, architectural, strategic, articulate, and helpful.
+Language Rule: Always respond in crisp, professional English by default. Only respond in Marathi (मराठी) or Hindi if the user explicitly writes their message in Marathi/Hindi or asks you to reply in Marathi.
 
 COMPLETE KNOWLEDGE BASE OF ANIKET BHALERAO & LUMINALM:
 1. Identity & Philosophy:
@@ -125,15 +126,41 @@ function extractGroundingSources(response: unknown): GroundingSource[] {
 
 function buildLocalPortfolioFallback(prompt: string): string {
   const q = prompt.toLowerCase();
+  const isMarathi = /[\u0900-\u097F]/.test(prompt) || q.includes("marathi");
+
+  if (isMarathi) {
+    return `### अनिकेत भालेराव × LuminaLM\n\n**अनिकेत भालेराव** हा एक Digital Creator, AI Enthusiast, Developer आणि Strategic Storyteller असून **LuminaLM** (*"Think Better. Build Better."*) चा संस्थापक आहे.\n\n- **प्रमुख प्लॅटफॉर्म**: [ToolNami Studio](https://toolnami.ai.studio) — ऑनलाइन प्रॉडक्टिव्हिटी आणि क्रिएटर टूल्स\n- **लाईव्ह इकोसिस्टम**: एकूण **07 लाईव्ह वेबसाईट्स** ([NeoLuxe](https://neoluxe.lovable.app), [NeoLuxe Trust](https://neoluxetrast.lovable.app), [Aniket Portfolio](https://aniketbhalerao.lovable.app))\n- **संपर्क**: \`aniketbhalerao065@gmail.com\``;
+  }
+
   if (
     q.includes("website") ||
     q.includes("project") ||
     q.includes("toolnami") ||
-    q.includes("ecosystem")
+    q.includes("ecosystem") ||
+    q.includes("7")
   ) {
-    return `### Aniket Bhalerao's 07 Live Digital Ecosystem Properties\n\n1. **ToolNami Studio** — [toolnami.ai.studio](https://toolnami.ai.studio) (Flagship online utility & productivity platform)\n2. **ToolNami (Lovable Edition)** — [toolnami.lovable.app](https://toolnami.lovable.app)\n3. **NeoLuxe** — [neoluxe.lovable.app](https://neoluxe.lovable.app) (Creative development & AI engineering portfolio)\n4. **NeoLuxe Trust** — [neoluxetrast.lovable.app](https://neoluxetrast.lovable.app) (Storytelling, psychology & anime edits)\n5. **Aniket Portfolio** — [aniketbhalerao.lovable.app](https://aniketbhalerao.lovable.app)\n6. **Personal Website** — [sites.google.com/view/aniketbhalerao](https://sites.google.com/view/aniketbhalerao)\n7. **Figma Showcase** — [cone-spore-23450341.figma.site](https://cone-spore-23450341.figma.site/)\n\n> *Tip: Select a Gemini API key in **Settings > Secrets** to unlock live Google Search, Maps Grounding, and multi-model reasoning.*`;
+    return `### Aniket Bhalerao's 07 Live Digital Ecosystem Properties\n\n1. **ToolNami Studio** — [toolnami.ai.studio](https://toolnami.ai.studio) (Flagship online utility & productivity platform)\n2. **ToolNami (Lovable Edition)** — [toolnami.lovable.app](https://toolnami.lovable.app)\n3. **NeoLuxe** — [neoluxe.lovable.app](https://neoluxe.lovable.app) (Creative development & AI engineering portfolio)\n4. **NeoLuxe Trust** — [neoluxetrast.lovable.app](https://neoluxetrast.lovable.app) (Storytelling, psychology & anime edits)\n5. **Aniket Portfolio** — [aniketbhalerao.lovable.app](https://aniketbhalerao.lovable.app)\n6. **Personal Website** — [sites.google.com/view/aniketbhalerao](https://sites.google.com/view/aniketbhalerao)\n7. **Figma Showcase** — [cone-spore-23450341.figma.site](https://cone-spore-23450341.figma.site/)`;
   }
-  return `**ASTATEC × LuminaLM AI** here. Aniket Bhalerao is a Digital Creator, AI Enthusiast, Developer, and Strategic Storyteller — and the founder of **LuminaLM** (*"Think Better. Build Better."*).\n\n- **Flagship Product**: [ToolNami Studio](https://toolnami.ai.studio)\n- **Case Studies**: *Madara in Phonk*, *Dark Psychology*, *Mastery & Vision*, *LuminaLM Identity*\n- **Interactive Labs**: 3D Three.js Kinetic Core & Live AlphaFold/PubChem Bioscience Workbench\n- **Direct Contact**: \`aniketbhalerao065@gmail.com\`\n\nAsk me anything about Aniket's websites, skills, 3D graphics, or bioscience tools!`;
+
+  if (
+    q.includes("3d") ||
+    q.includes("bioscience") ||
+    q.includes("alphafold") ||
+    q.includes("science")
+  ) {
+    return `### Interactive 3D & Bioscience Labs\n\n- **LuminaLM 3D Kinetic Core**: An 8-part procedural Three.js WebGL sculpture featuring fluted titanium lathe geometry, rotating gimbals, sapphire crystal optics, and an interactive **Exploded View** controller.\n- **Bioscience & Molecular Lab**: Connects live to **DeepMind AlphaFold DB (v6)**, **RCSB PDB**, **UniProtKB**, and **PubChem** to inspect 3D pLDDT confidence scores and Lipinski Rule-of-5 pharmacology.`;
+  }
+
+  if (
+    q.includes("contact") ||
+    q.includes("hire") ||
+    q.includes("collaborate") ||
+    q.includes("email")
+  ) {
+    return `### Collaborate with Aniket Bhalerao\n\n- **Primary Email**: \`aniketbhalerao065@gmail.com\`\n- **Support & Media**: \`support.neoluxetrust@gmail.com\`\n- **GitHub**: [github.com/heyaniket065](https://github.com/heyaniket065?tab=repositories)\n- **LinkedIn**: [Aniket Bhalerao](https://www.linkedin.com/in/aniket-bhalerao-o07)`;
+  }
+
+  return `### ASTATEC × LuminaLM Intelligence\n\n**Aniket Bhalerao** is a Digital Creator, AI Enthusiast, Developer, and Strategic Storyteller — and the founder of **LuminaLM** (*"Think Better. Build Better."*).\n\n- **Flagship Product**: [ToolNami Studio](https://toolnami.ai.studio)\n- **Case Studies**: *Madara in Phonk*, *Dark Psychology*, *Mastery & Vision*, *LuminaLM Identity*\n- **Interactive Labs**: 3D Three.js Kinetic Core & Live AlphaFold/PubChem Bioscience Workbench\n- **Direct Contact**: \`aniketbhalerao065@gmail.com\`\n\nAsk me about any of Aniket's **07 websites**, **case studies**, **skills**, or **interactive tools**!`;
 }
 
 async function handleAiRequest(request: Request, pathname: string): Promise<Response> {

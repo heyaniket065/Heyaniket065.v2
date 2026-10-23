@@ -1,18 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowUpRight,
-  Globe,
-  Loader2,
-  MapPin,
-  Maximize2,
-  Mic,
-  Send,
-  Sparkles,
-  Volume2,
-  X,
-} from "lucide-react";
+import { ArrowUpRight, Globe, Loader2, MapPin, Maximize2, Send, Volume2, X } from "lucide-react";
 import { AstatecLogo } from "@/components/ui/AstatecLogo";
+import { FormattedMarkdown } from "@/components/ui/FormattedMarkdown";
 
 type GroundingSource = {
   kind: "web" | "maps";
@@ -30,10 +20,10 @@ type ChatMsg = {
 };
 
 const QUICK_PROMPTS = [
-  "Aniket च्या सर्व ७ वेबसाईट्स दाखव",
-  "Who is Aniket Bhalerao & what is LuminaLM?",
-  "Tell me about ToolNami & Bioscience tools",
-  "How can I hire or collaborate with Aniket?",
+  "Show all 7 live websites",
+  "Who is Aniket Bhalerao?",
+  "Explore 3D & Bioscience tools",
+  "How to collaborate with Aniket?",
 ] as const;
 
 export function FloatingAiWidget() {
@@ -47,7 +37,7 @@ export function FloatingAiWidget() {
     {
       id: "welcome",
       role: "model",
-      text: "नमस्कार! मी **ASTATEC AI** (LuminaLM Intelligence) आहे. मला अनिकेत भालेरावच्या ७ लाईव्ह वेबसाईट्स, 3D स्टुडिओ, Bioscience टूल्स किंवा प्रोजेक्ट्सबद्दल मराठी किंवा English मध्ये काहीही विचारा!",
+      text: "Hello! I am **ASTATEC AI** — the official intelligence co-pilot for **Aniket Bhalerao × LuminaLM**.\n\nAsk me anything about Aniket's **07 live websites**, **case studies**, **3D WebGL core**, or **Bioscience tools**.",
       modelUsed: "gemini-3.8-flash",
     },
   ]);
@@ -107,7 +97,7 @@ export function FloatingAiWidget() {
         {
           id: `e-${Date.now()}`,
           role: "model",
-          text: "कनेक्शनमध्ये अडचण आली. तुम्ही `/ai-studio` वर जाऊन पूर्ण AI Workspace वापरू शकता.",
+          text: "Connection interrupted. You can also launch the full **AI Studio** from the top menu.",
         },
       ]);
     } finally {
@@ -118,11 +108,12 @@ export function FloatingAiWidget() {
   const speakMessage = async (msg: ChatMsg) => {
     if (speakingId === msg.id) return;
     setSpeakingId(msg.id);
+    const cleanSpeech = msg.text.replace(/[*#`_~[\]()]/g, "");
     try {
       const res = await fetch("/api/ai/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: msg.text.replace(/[*#`]/g, ""), voice: "Zephyr" }),
+        body: JSON.stringify({ text: cleanSpeech, voice: "Zephyr" }),
       });
       const data = (await res.json()) as { audioDataUrl?: string };
       if (data.audioDataUrl) {
@@ -130,7 +121,7 @@ export function FloatingAiWidget() {
         audio.onended = () => setSpeakingId(null);
         await audio.play();
       } else if ("speechSynthesis" in window) {
-        const u = new SpeechSynthesisUtterance(msg.text.replace(/[*#`]/g, ""));
+        const u = new SpeechSynthesisUtterance(cleanSpeech);
         u.onend = () => setSpeakingId(null);
         window.speechSynthesis.speak(u);
       } else {
@@ -222,13 +213,13 @@ export function FloatingAiWidget() {
                 className={`flex flex-col ${m.role === "user" ? "items-end" : "items-start"}`}
               >
                 <div
-                  className={`max-w-[88%] border p-3 text-xs leading-relaxed ${
+                  className={`max-w-[90%] border p-3 text-xs leading-relaxed ${
                     m.role === "user"
                       ? "border-accent-blue/60 bg-accent-blue/15 text-ink"
                       : "border-hairline bg-surface text-ink"
                   }`}
                 >
-                  <p className="whitespace-pre-wrap">{m.text}</p>
+                  <FormattedMarkdown content={m.text} />
 
                   {m.sources && m.sources.length > 0 ? (
                     <div className="mt-2.5 border-t border-hairline pt-2">
@@ -301,7 +292,7 @@ export function FloatingAiWidget() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Astatec AI (Marathi / English)..."
+              placeholder="Ask Astatec AI about Aniket's work..."
               className="h-9 flex-1 border border-hairline bg-background px-3 text-xs text-ink outline-none focus:border-accent-blue"
             />
             <button

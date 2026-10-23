@@ -21,6 +21,7 @@ import {
   Wand2,
 } from "lucide-react";
 import { AstatecLogo } from "@/components/ui/AstatecLogo";
+import { FormattedMarkdown } from "@/components/ui/FormattedMarkdown";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/ai-studio")({
@@ -87,16 +88,16 @@ const STARTER_CARDS = [
       "Give me a complete breakdown of all 7 live websites in Aniket Bhalerao's digital ecosystem and their URLs.",
   },
   {
-    category: "Marathi Co-Pilot",
-    title: "अनिकेत भालेराव आणि LuminaLM बद्दल माहिती",
+    category: "Creator Profile",
+    title: "Who is Aniket Bhalerao & what is LuminaLM?",
     prompt:
-      "अनिकेत भालेराव कोण आहे आणि त्याच्या LuminaLM इकोसिस्टम, 3D स्टुडिओ आणि प्रोजेक्ट्सबद्दल मराठीत माहिती दे.",
+      "Tell me about Aniket Bhalerao's background, his LuminaLM philosophy, core skills, and creative direction.",
   },
   {
-    category: "Live Web Search",
-    title: "Latest breakthroughs in AI & Protein Design",
+    category: "Live Web & Science",
+    title: "Explore 3D WebGL & Bioscience AlphaFold Tools",
     prompt:
-      "What are the latest breakthroughs in AI agents and AlphaFold protein structure design?",
+      "Explain the interactive 3D Chronometer Core and the AlphaFold/PubChem Bioscience Workbench on this site.",
   },
   {
     category: "Case Study Strategy",
@@ -621,8 +622,8 @@ function AiStudioPage() {
                         <span>{msg.timestamp}</span>
                       </div>
 
-                      <div className="mt-3 whitespace-pre-wrap text-sm leading-relaxed">
-                        {msg.text}
+                      <div className="mt-3 text-sm leading-relaxed">
+                        <FormattedMarkdown content={msg.text} />
                       </div>
 
                       {msg.sources && msg.sources.length > 0 ? (
